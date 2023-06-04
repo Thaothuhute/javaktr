@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Book List</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body>
+    <th:block th:replace="layout :: header"></th:block>
+    <div class="container">
+        <h1 th:text="${title}"></h1>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Ten nhan vien</th>
+                <th>phai</th>
+                <th>noi sinh</th>
+                <th>luong</th>
+                <th>phong ban</th>
+                <th></th>
+            </tr>
+            <tr th:each="nhanvien : ${nhanvien}">
+                <td th:text="${nhanvien.id}"></td>
+                <td th:text="${nhanvien.tennhanvien}"></td>
+                <td th:switch="${nhanvien.phai}">
+                    
+                        <img th:case="NU" th:src="@{https://tse1.mm.bing.net/th?id=OIP.WvA4vo0hrqjx4yjpMD-1mgHaIh&pid=Api&P=0&h=180}" width="30" height="30">
+                        <img th:case="NAM" th:src="@{https://tse3.mm.bing.net/th?id=OIP.Kf-A4bhyw6NFAggbsk3cdwHaIU&pid=Api&P=0&h=180}" width="30" height="30">
+                   
+                </td>
+                <td th:text="${nhanvien.noisinh}"></td>
+                <td th:text="${nhanvien.luong}"></td>
+
+                <td th:text="${nhanvien.phongban.tenphong}"></td>
+                <td>
+                    <a th:href="@{/nhanvien/edit/{id}(id=${nhanvien.id})}">Edit</a>|
+                    <a th:href="@{/nhanvien/delete/{id}(id=${nhanvien.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <th:block th:replace="layout :: footer"></th:block> 
+</body>
+</html>
+
